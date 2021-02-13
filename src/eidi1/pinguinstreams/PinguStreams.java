@@ -19,21 +19,21 @@ public class PinguStreams {
 
     public static Stream<Penguin> penguins() {
         // TODO
-        return null;
+        return lines().skip(1).map(x -> x.startsWith(";")).;
     }
 
     public static Stream<Penguin> filter(Stream<Penguin> stream, String field, String value) {
         // TODO
-        return null;
+        return stream.filter(x -> { return field == value;});
     }
 
     public static Stream<String> getFeature(Stream<Penguin> stream, String field) {
-        return stream.map(p -> p.get(field));
+        return stream.filter();
     }
 
     public static double getAverage(Stream<Penguin> stream, String field) {
         // TODO
-        return 0d;
+        return stream.map(x -> );
     }
 
     public static double getAverageOfSpecies(String species, String feature) {
