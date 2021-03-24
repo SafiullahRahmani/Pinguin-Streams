@@ -3,6 +3,7 @@ package eidi1.pinguinstreams;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class PinguStreams {
@@ -19,21 +20,29 @@ public class PinguStreams {
 
     public static Stream<Penguin> penguins() {
         // TODO
-        return lines().skip(1).map(x -> x.startsWith(";")).;
+        return lines()
+                .skip(1)
+                .map(s -> s.split(";"))
+                .map(Penguin::new);
     }
 
     public static Stream<Penguin> filter(Stream<Penguin> stream, String field, String value) {
         // TODO
-        return stream.filter(x -> { return field == value;});
+        return stream
+                .filter(penguin -> penguin.get(field).equals(value));
     }
 
     public static Stream<String> getFeature(Stream<Penguin> stream, String field) {
-        return stream.filter();
+        return null;
     }
 
     public static double getAverage(Stream<Penguin> stream, String field) {
         // TODO
-        return stream.map(x -> );
+        return getFeature(stream, field)
+                .filter(penguin -> !penguin.equals("NA"))
+                .mapToDouble(Double::parseDouble)
+                .average()
+                .orElse(0);
     }
 
     public static double getAverageOfSpecies(String species, String feature) {
@@ -64,9 +73,10 @@ public class PinguStreams {
     }
 
     public static void main(String[] args) {
-        String[] pingu = "Chinstrap,Dream,50.9,17.9,196,3675,female,2009".split(",");
-        System.out.println(classifyPenguin(new Penguin(pingu)));
-        System.out.println(accuracy());
+//        String[] pingu = "Chinstrap,Dream,50.9,17.9,196,3675,female,2009".split(",");
+//        System.out.println(classifyPenguin(new Penguin(pingu)));
+//        System.out.println(accuracy());
+
     }
 
     public static double accuracy() {
@@ -77,5 +87,4 @@ public class PinguStreams {
                 .average()
                 .orElse(0);
     }
-
 }
